@@ -4,6 +4,7 @@ resource "aws_key_pair" "default" {
 }
 
 resource "aws_security_group" "default" {
+  vpc_id      = aws_default_vpc.default.id
   name_prefix = var.identity
 
   ingress {
@@ -66,3 +67,8 @@ resource "aws_instance" "web" {
   }
 }
 
+resource "aws_default_vpc" "default" {
+  tags = {
+    Name = "Default VPC"
+  }
+}
